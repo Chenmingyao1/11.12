@@ -88,9 +88,40 @@ void Free_LinkList(NODE*head)
     }
     free(head) ;
 }
+NODE *Search_LinkList(NODE*head,int score)
+{
+    NODE *p;
+    p=head;
+    while(p!=NULL)
+    {
+        if(p->score==score)
+        break;
+        else
+        {
+            p=p->next;
+        }
+        
+    }return p;
+}
+int Update_LinkList(NODE*head,int oldscore,int newscore)
+{
+    NODE*p=NULL;
+    p=Search_LinkList(head,oldscore);
+    if(NULL==p)
+    {
+        printf("sorry,no found!\n");
+        return 0;
+    }
+    p->score=newscore;
+    printf("update successfully!\n");
+    return 1;
+}
+
 void main()
 {
     NODE*head,*pnew;
+    int chazhao;
+    NODE*p;
     head=Create_LinkList();
     if(head==NULL)
     return;
@@ -109,6 +140,12 @@ void main()
     Delete_LinkList(head,3);
     printf("after delete:");
     Display_LinkList(head);
+    p=Search_LinkList(head,65);
+    
+    Update_LinkList(head,65,99);
+
+Display_LinkList(head);
+    
     Free_LinkList(head);
     
 }
